@@ -1,46 +1,37 @@
 const myLibrary = [
-  {
-    title: "Book 1 Book 1 Book 1 Book 1 Book 1 Book 1",
-    author: "Author 1"
-
-  },
-  {
-    title: "Book 2",
-    author: "Author 2"
-
-  },
-  {
-    title: "Book 3",
-    author: "Author 3"
-
-  },
-  {
-    title: "Book 4",
-    author: "Author 4"
-
-  },
-  {
-    title: "Book 5",
-    author: "Author 5"
-
-  }
 ];
 
-function Book() {
-  // the constructor...
+const form = document.getElementById('form')
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  const formData = new FormData(form)
+  for (const pair of formData.entries()) {
+    console.log(pair)
+  }
+})
+
+function Book(title, author) {
+  this.title = title;
+  this.author = author;
+
+  return 
 }
 
-function addBookToLibrary() {
-  // do stuff here
+function addBookToLibrary(book) {
+  myLibrary.push(book);
 }
 
 let libraryGrid = document.getElementById("book-grid");
 
 function updateBooksGrid() {
-  //resetBooksGrid()
+  resetBooksGrid()
   for (let book of myLibrary) {
     createBookCard(book);
   }
+}
+
+function resetBooksGrid() {
+  libraryGrid.innerHTML = '';
 }
 
 function createBookCard(book) {
@@ -80,3 +71,10 @@ function createBookCard(book) {
   //bookCard.appendChild(buttonGroup)
   libraryGrid.appendChild(bookCard)
 }
+
+addBookToLibrary(new Book("1984", "George Orwell"));
+addBookToLibrary(new Book("Animal Farm" , "George Orwell"));
+addBookToLibrary(new Book("Dracula" , "Bram Stoker"));
+addBookToLibrary(new Book("Fahrenheit 451" , "Ray Bradbury"));
+addBookToLibrary(new Book("Odyssey" , "Homer"));
+updateBooksGrid();
